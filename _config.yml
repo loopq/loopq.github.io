@@ -1,10 +1,10 @@
 # Site settings
-title: Hux Blog
-SEOTitle: 黄玄的博客 | Hux Blog
+title: Daisy Blog
+SEOTitle: 祝虎的博客 | Daisy Blog
 header-img: img/home-bg.jpg
-email: huxpro@gmail.com
-description: "关于前端与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Front-End Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
-keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, 前端, 设计, 产品, 肖玉, Lynn, 肖玉的男朋友"
+email: 18511100353@163.com
+description: "关于移动开发与Python、骑行 | 祝虎，Web & Mobile Lover，Front-End Engineer | 这里是 @Daisy祝虎 的个人博客，与你一起发现世界。"
+keyword: "Daisy,祝虎,祝虎的博客, Daisy Blog, 博客, 个人网站, 互联网, Python, 设计, 吕翠, 吕翠的男朋友"
 url: ""              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -12,11 +12,11 @@ baseurl: ""                             # for example, '/blog' if your blog host
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
+weibo_username:     路从今夜白0808
+zhihu_username:     路從今燁白
+github_username:    loopq
 #twitter_username:  huxpro
-facebook_username:  huxpro
+# facebook_username:  huxpro
 # linkedin_username:  firstname-lastname-idxxxx
 
 
@@ -48,10 +48,10 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: hux
+disqus_username: zhuhu
 
 # Duoshuo settings
-duoshuo_username: huxblog
+duoshuo_username: zhuhu
 # Share component is depend on Comment so we can NOT use share only.
 duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
@@ -70,8 +70,8 @@ ga_domain: huangxuan.me
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，做做设计，<br>离开世界之前，一切都是过程"
-sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "我的描述留给你来写，<br>离开世界之前，一切都是过程"
+sidebar-avatar: /img/avatar-daisy.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 

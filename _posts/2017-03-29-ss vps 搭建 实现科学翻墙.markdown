@@ -1,0 +1,50 @@
+---
+layout:     post
+title:      "ss 科学翻墙"
+subtitle:   " \"科学翻墙\""
+date:       2017-03-29 12:00:00
+author:     "Daisy"
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+tags:
+    - 生活
+---
+
+> “科学翻墙 乐翻天. ”
+
+<ul>
+ 	<li>利用了大概两个小时的时间搭建了一个用于翻墙的服务器。</li>
+ 	<li>环境:</li>
+</ul>
+<blockquote>
+<p style="text-align: left;">     服务器端:digital ocean + 7.3 centos</p>
+<p style="text-align: left;">     客户端:ShadowSocks + win 10</p>
+</blockquote>
+<ul>
+ 	<li style="text-align: left;">购买的是一个月5$的服务器，新加坡节点，购买之后登入，输入下面命令</li>
+</ul>
+	wget --no-check-certificate -O shadowsocks-libev.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev.sh
+	chmod +x shadowsocks-libev.sh
+	./shadowsocks-libev.sh 2&gt;&amp;1 | tee shadowsocks-libev.log
+<ul>
+ 	<li style="text-align: left;">安装完之后应该有类似下方的输出</li>
+</ul>
+	Congratulations, Shadowsocks-libev install completed!
+	Your Server IP:your_server_ip
+	Your Server Port:your_server_port
+	Your Password:your_password
+	Your Local IP:127.0.0.1
+	Your Local Port:1080
+	Your Encryption Method:aes-256-cfb
+	
+	Welcome to visit:https://teddysun.com/357.html
+	Enjoy it!
+<ul>
+ 	<li style="text-align: left;"> 如果有上方输出，代表安装成功！</li>
+ 	<li style="text-align: left;">接下来是客户端设置</li>
+ 	<li style="text-align: left;">分别为windows 和 mac 以及移动端</li>
+ 	<li style="text-align: left;">windows去 <a href="https://github.com/shadowsocks/shadowsocks-windows">https://github.com/shadowsocks/shadowsocks-windows</a> 下载</li>
+ 	<li style="text-align: left;">mac 去 <a href="https://github.com/taichisocks/shadowsocks">https://github.com/taichisocks/shadowsocks</a> 下载</li>
+ 	<li style="text-align: left;">android <a href="https://github.com/shadowsocks/shadowsocks-android">https://github.com/shadowsocks/shadowsocks-android</a></li>
+ 	<li style="text-align: left;">ios <a href="https://github.com/shadowsocks/shadowsocks-iOS">https://github.com/shadowsocks/shadowsocks-iOS</a></li>
+</ul>
