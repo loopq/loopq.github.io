@@ -3,14 +3,14 @@ layout:     post
 title:      "WordPress 迁移 Jekyll"
 subtitle:   " \"简洁的博客带给人好心情\""
 date:       2017-05-30 11:00:00
-author:     "Hux"
+author:     "Daisy"
 header-img: "img/post-bg-2017-05-31.jpg"
 catalog: true
 tags:
-    - Python
+    - 博客
 ---
 
-> “Yeah It's on. ”
+> “端午假日后第一天. ”
 
 ## Started ##
 
