@@ -23,9 +23,11 @@ tags:
 <ul>
  	<li style="text-align: left;">购买的是一个月5$的服务器，新加坡节点，购买之后登入，输入下面命令</li>
 </ul>
-	wget --no-check-certificate -O shadowsocks-libev.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev.sh
-	chmod +x shadowsocks-libev.sh
-	./shadowsocks-libev.sh 2&gt;&amp;1 | tee shadowsocks-libev.log
+    wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev.sh
+    
+    chmod +x shadowsocks-libev.sh
+    
+    ./shadowsocks-libev.sh 2>&1 | tee shadowsocks-libev.log
 <ul>
  	<li style="text-align: left;">安装完之后应该有类似下方的输出</li>
 </ul>
