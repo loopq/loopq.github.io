@@ -21,7 +21,7 @@ tags:
  	<li>服务器版本:Centos 7.2</li>
  	<li>服务端语言: python作为爬虫 + PHP写了一部分的APP接口</li>
 </ul>
-	<blockquote>搭建过程
+	搭建过程
 	一．获取ssbc源代码
 	1.环境检测（Ssbc当前版本是基于django1.8.1开发，所需python环境为python2.7.5以上。）
 	[root@localhost ~]# python -V
@@ -68,12 +68,39 @@ tags:
 	然后在 index 目录创建文件夹： db 和 binlog （两个文件夹）
 	然后在 tem 目录创建文件夹： downloads
 	最后 给 data 以及 tem 文件夹赋予 755 或者 777 权限 （需要继承到子文件夹）
-	[root@localhost ssbc-master]# indexer -c sphinx.conf –all （all 前面是空格减号减号）
-	[root@localhost ssbc-master]# searchd –config ./sphinx.conf (config前空格减号减号)
+	[root@localhost ssbc-master]# indexer -c sphinx.conf --all （all 前面是空格减号减号）
+	[root@localhost ssbc-master]# searchd --config ./sphinx.conf (config前空格减号减号)
 	五．开启爬虫(workers目录下)
 	1.爬虫：执行：python simdht_worker.py （等2两分钟出现数据之后可以CTRL+C停止）
-	1.1 执行命令：nohup python simdht_worker.py &gt;/dev/zero &amp; （让爬虫在后台运行）
+	1.1 执行命令：nohup python simdht_worker.py >/dev/zero & （让爬虫在后台运行）
 	2.入库：执行：python index_worker.py （等待10分钟没有出现数据之后可以CTRL+C停止）
-	2.1 后台执行命令：nohup python index_worker.py &gt;/dev/zero &amp; （让爬虫在后台运行）
-上面是服务端搭建过程，APP端就可以自己自由发挥了，只要对接好接口就可以。</blockquote>
+	2.1 后台执行命令：nohup python index_worker.py >/dev/zero &（让爬虫在后台运行）
+上面是服务端搭建过程，APP端就可以自己自由发挥了，只要对接好接口就可以。<br>
+
+### 常用命令 ###
+#### 防火墙 ####
+    systemctl start firewalld         # 启动,
+	systemctl enable firewalld        # 开机启动
+	systemctl stop firewalld          # 关闭
+	systemctl disable firewalld       # 取消开机启动
+
+#### 查看后台进程 ####
+    ps -elf
+
+#### 杀死后台进程 ####
+	kill pid
+
+#### mysql 相关 ####
+	添加进数据库的时候有可能会因为最大添加受限而添加失败。
+    SET GLOBAL max_allowed_packet=1024*1024*1024; // 赋值
+	SHOW VARIABLES LIKE 'max_allowed_packet'; // 显示最大允许
+	flush privileges; // 刷新数据库
+	
+	mysqldump -u root -p wordpress > backup.sql // mysql导出数据
+
+	select count(*) from search_hash; // 查询
+
+	grant all privileges on *.* to 'root'@'%' identified by ''; 指定mysql或者mariadb可以远程连接;
+
+
 这应该可以说是开通这个博客以来的第一篇文章，以备后记。
