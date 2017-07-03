@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Android开发资源"
-subtitle:   " \"个人手机简便Android开发资源\""
+subtitle:   " \"个人收集简便Android开发资源\""
 date:       2017-07-01 11:02:20
 author:     "Daisy"
 header-img: "img/post-bg-rxcache.jpg"
