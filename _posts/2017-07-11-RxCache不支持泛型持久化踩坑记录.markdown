@@ -1,0 +1,92 @@
+---
+layout:     post
+title:      "Android开发资源"
+subtitle:   " \"踩坑还是必要的\""
+date:       2017-07-01 11:02:20
+author:     "Daisy"
+header-img: "img/post-bg-rxcache.jpg"
+catalog: true
+tags:
+    - Android
+---
+
+> “慢慢来才最快. ”
+
+# 踩坑记录 #
+> 前段时间将公司的项目架构重新改了一遍，改的途中肯定会遇到坑，记录下来总比烂在脑子里好<br>
+> 简单介绍一下RxCache,一个缓存库，Rx大家族中的一员。配合RxJava用起来很爽.
+
+## 记录开始 ##
+> 使用RxCache的时候发现不支持泛型序列化。泛型的类大致如下<br>
+
+    class Response<T> {
+
+	    int code;
+	
+	   T data;
+	
+	 }
+这是我现在见到的主流的封装网络请求返回体的格式，Data为可变的类型，其他的属性不变，问题在于RxCache不支持泛型的序列化，OK，我们来解决，既然你不支持泛型那我使用非泛型来缓存，所以我将Retrofit和RxCache的请求网络的代码变成了这样
+	
+RxCache
+
+
+
+    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
+    Observable<Reply<JsonObject>> getHomePage(Observable<JsonObject> homePage, DynamicKey idLastUserQueried, EvictProvider evictProvider);
+    
+Retrofit
+
+    @FormUrlEncoded
+    @POST(HttpApi.NEWINDEX)
+    Observable<JsonObject> getHomePage(@FieldMap Map<String, String> maps);
+
+这样发现确实可以缓存，但是我们使用起来很不方便，我们不可能拿着JSONObject去操作，这时候轮到RxJava登场，转换一下数据格式对于RxJava来说是很Easy的事.
+
+RxJava
+
+    mRepositoryManager.obtainRxCacheService(CommonCache.class)
+                .getHomePage(homePage
+                        , new DynamicKey(1) // 因为是首页 所以一般来说是固定的内容 五分钟自动刷新一次
+                        , new EvictProvider(false)) // 如果为true 代表强制刷新 不获取缓存
+                .flatMap(new Function<Reply<JsonObject>, ObservableSource<BaseBean<IndexInfo>>>() {
+                    @Override
+                    public ObservableSource<BaseBean<IndexInfo>> apply(@NonNull Reply<JsonObject> jsonObjectReply) throws Exception {
+                        return Observable.just(jsonObjectReply.getData(),BaseBean.class);
+                    }
+                });
+
+## 以为已经完了？ ##
+> no，这才刚刚开始
+
+现在的json解析库解析基本都是这么一句话<br>
+
+    mGson.fromJson(jsonObjectReply.getData(),BaseBean.class)
+
+对于普通的解析是够的，但是我们需要的类型是泛型的，所以后来我改成了这样
+
+    return Observable.just(mGson.fromJson(jsonObjectReply.getData(), new BaseBean<IndexInfo>().getClass()));
+
+yes，我以为搞定了，已经不报错了不是吗？但是运行时开始报错了
+	
+    Error:(62, 47) 错误: 不兼容的类型: Observable<BaseBean>无法转换为ObservableSource<BaseBean<IndexInfo>>
+
+后面我明白泛型在运行时的getclass并不能取到泛型的class，OK此路不通，另路，与此同时我想到为什么Gson(我这里使用的是Gson)不能替我干这些事呢？  为什么他不能帮我去搞定呢？所以我发现了这种写法
+	
+     Type objectType = new TypeToken<BaseBean<IndexInfo>>() {}.getType();
+	 BaseBean<IndexInfo> indexInfoBaseBean = mGson.fromJson(jsonObjectReply.getData(), objectType);
+	 return Observable.just(indexInfoBaseBean);
+
+OK.That's done.踩坑完毕 
+
+参考链接:<br>
+[http://www.cnblogs.com/qq78292959/p/3781808.html](http://www.cnblogs.com/qq78292959/p/3781808.html)<br>
+[http://bbs.csdn.net/topics/390376611/](http://bbs.csdn.net/topics/390376611/)<br>
+[https://github.com/VictorAlbertos/RxCache/issues/41](https://github.com/VictorAlbertos/RxCache/issues/41)
+
+
+	
+
+
+
+
