@@ -2,7 +2,7 @@
 layout:     post
 title:      "RxCache不支持泛型持久化踩坑记录"
 subtitle:   " \"踩坑还是必要的\""
-date:       2017-07-01 11:02:20
+date:       2017-07-11 11:02:20
 author:     "Daisy"
 header-img: "img/post-bg-rxcache.jpg"
 catalog: true
