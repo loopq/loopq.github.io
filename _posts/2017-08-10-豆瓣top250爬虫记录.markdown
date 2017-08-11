@@ -1,0 +1,147 @@
+---
+layout:     post
+title:      "豆瓣Top250爬虫"
+subtitle:   " \"爬虫开始\""
+date:       2017-08-10 11:02:20
+author:     "Daisy"
+header-img: "img/post-bg-rwd"
+catalog: true
+tags:
+    - python
+---
+
+> “crawl ”
+
+
+## Python 豆瓣top250爬虫 ##
+
+> version:python 3.5.2 <br>
+> library: requests + bs4 + re + mysql-connector
+
+
+#### 代码记录如下： ####
+
+    # -*- coding:utf-8 -*-
+	
+	import re
+	
+	import mysql.connector
+	import requests
+	from bs4 import BeautifulSoup
+	from requests import RequestException
+	
+	conn = mysql.connector.connect(user='root', password='', database='test',charset='utf8')
+
+	
+	def get_page_index(url):
+	    try:
+	        r = requests.get(url)
+	        if r and r.status_code == 200:
+	            parse_page_detail(r.text)
+	    except RequestException:
+	        print('获取单页数据失败')
+	
+	
+	def parse_page_detail(html):
+	    if html:
+	        soup = BeautifulSoup(html, 'lxml')
+	        ol = soup.find('ol', class_='grid_view')
+	        if ol:
+	            for li in ol.find_all('li'):
+	                titlearr = li.find_all('span', class_=['title', 'other'])  # 名称
+	                title = ''
+	                for t in titlearr:
+	                    title += t.get_text().strip()
+	                content = li.p.get_text().strip()
+	                pattern = re.compile(
+	                    r'.*?导演:(?P<director>.*?)主演:.*?...(?P<year>\d{4}.*?)/(?P<producePlace>.*?)/(?P<type>.*?)$', re.S)
+	                con = pattern.search(content)
+	                if con:
+	                    direc = con.group(1).strip()
+	                    year = con.group(2).strip()
+	                    country = con.group(3).strip()
+	                    movietype = con.group(4).strip()
+	                    score = li.find('span', class_='rating_num').get_text().strip()
+	                    personCount = 0
+	                    if re.search('(?P<personCount>.*?)人评价',
+	                                 li.find('span', content='10.0').find_next_sibling('span').get_text()):
+	                        personCount = re.search('(?P<personCount>.*?)人评价',
+	                                                li.find('span', content='10.0').find_next_sibling(
+	                                                    'span').get_text()).group(1).strip()
+	                    descri = li.find('span', class_='inq').get_text()
+	
+	                    params = {
+	                        'title': title,
+	                        'direc': direc,
+	                        'year': year,
+	                        'country': country,
+	                        'movietype': movietype,
+	                        'score': score,
+	                        'personCount': personCount,
+	                        'descri': descri
+	                    }
+	
+	                    save_to_db(params)
+	
+	
+	def save_to_db(params):
+	    try:
+	        if (params):
+	            cursor = conn.cursor()
+	            cursor.execute(
+	                '''insert into douban (db_title,db_direc,db_year,db_country,db_movietype,db_score,db_personCount,db_descri)values (%s,%s,%s,%s,%s,%s,%s,%s)'''
+	                , (
+	                    params['title'], params['direc'], params['year'], params['country'], params['movietype'],
+	                    params['score'],
+	                    params['personCount']
+	                    , params['descri']))
+	
+	            conn.commit()
+	            cursor.close()
+	            print('添加成功'+params['title'])
+	    except BaseException as e:
+	        print('save_db 出错啦', e)
+	
+	
+	def main():
+	    for i in range(10):
+	        url = 'https://movie.douban.com/top250?start=%s' % (i * 25)
+	        get_page_index(url)
+	
+	
+	if __name__ == '__main__':
+	    main()
+
+#### sql 建表语句 ####
+
+    
+    CREATE TABLE `douban` (
+	  `db_id` int(11) NOT NULL AUTO_INCREMENT,
+	  `db_title` varchar(255) DEFAULT NULL,
+	  `db_direc` varchar(255) DEFAULT NULL,
+	  `db_year` varchar(255) DEFAULT NULL,
+	  `db_country` varchar(255) DEFAULT NULL,
+	  `db_movietype` varchar(255) DEFAULT NULL,
+	  `db_score` varchar(255) DEFAULT NULL,
+	  `db_personCount` varchar(255) DEFAULT NULL,
+	  `db_descri` varchar(255) DEFAULT NULL,
+	  PRIMARY KEY (`db_id`)
+	) ENGINE=InnoDB AUTO_INCREMENT=484 DEFAULT CHARSET=utf8;
+
+
+很简单的一个爬虫，没有什么难得知识点，只是我花费的时间多的地方在于正则匹配的模块，我对正则很不熟悉，这是致命的，需要狂补充。
+
+
+#### 遇到了几个问题，在这里说下。 ####
+1. 加入数据库的时候乱码，我将数据库的编码设置为utf8之后搞定。一般乱码的情况下客户端只要保持和数据库的编码相同不会报错
+2. 正则是个很强大的东西，但是太灵活百变，需要把握住使用的G点，这样才能提高效率
+
+**END**
+
+
+
+
+
+
+
+
