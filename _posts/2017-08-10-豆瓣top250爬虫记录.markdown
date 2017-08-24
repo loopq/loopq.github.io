@@ -4,7 +4,7 @@ title:      "豆瓣Top250爬虫"
 subtitle:   " \"爬虫开始\""
 date:       2017-08-10 11:02:20
 author:     "Daisy"
-header-img: "img/post-bg-rwd"
+header-img: "img/post-bg-rwd.jpg"
 catalog: true
 tags:
     - python

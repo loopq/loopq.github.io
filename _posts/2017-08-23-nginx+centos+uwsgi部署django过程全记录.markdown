@@ -4,7 +4,7 @@ title:      "nginx + uwsgi + centos 部署 django过程全记录"
 subtitle:   " \"django\""
 date:       2017-08-23 11:02:20
 author:     "Daisy"
-header-img: "img/post_django"
+header-img: "img/post_django.jpg"
 catalog: true
 tags:
     - django
