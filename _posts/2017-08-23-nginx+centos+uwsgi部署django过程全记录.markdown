@@ -63,7 +63,7 @@ centos7自带python版本 2.7，我们安装3.5.2,
 centos7中推荐使用mariadb，如果你项目中没有用到mysql你可以不安装
 
 	yum install mariadb-server mariadb  安装
- 	systemctl start mariadb 	#启动mysql
+	systemctl start mariadb 	#启动mysql
 	mysql -u root -p #登录mysql 密码默认为空 执行下方的创建数据库语句
 	CREATE DATABASE `blog` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci; # 创建数据库，后面我们会用到
 	exit # 退出数据库
