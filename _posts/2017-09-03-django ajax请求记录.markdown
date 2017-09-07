@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "django + nginx 避免csrf 保护 "
+title:      "django + ajax 避免csrf 保护 "
 subtitle:   " \"django ajax 请求记录\""
 date:       2017-09-03 11:02:20
 author:     "Daisy"
