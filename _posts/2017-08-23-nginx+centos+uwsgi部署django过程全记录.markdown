@@ -73,10 +73,10 @@ centos7中推荐使用mariadb，如果你项目中没有用到mysql你可以不�
 前面都是准备工作，下面我们来点看得见的东西。将我们的项目运行起来。如果你不是使用我的源码，请保证你的代码可以通过runserver跑起来，这样才可以谈得上在服务器上部署，下面请跟着一起做，每一步都尽量相同
 
 	cd /opt/
-	mkdir blog
-	cd blog
+	mkdir blog //我们的工作目录
+	cd blog  
 	mkdir script # 新建一个文件夹，我们后面有用，现在先不用管
-	git clone https://github.com/loopq/django_blog.git # 拉取源码
+	git clone https://github.com/loopq/django_blog.git # 拉取源码  django_blog是工程目录
 
 前面我们已经拉取了代码，接下来我们运行一下，看看我们的代码是不是好的！
 	
@@ -171,7 +171,7 @@ uwsgi 启动服务
 	server {
 	listen 80; # 监听哪个端口
 	server_name 45.32.71.174 ;  # 你的ip地址 或者是域名，如果是域名需要解析dns，这个自行搞定
-	access_log /var/log/nginx/access.log main;  # 日志记录
+	access_log /var/log/nginx/access.log;  # 日志记录
 	error_log /var/log/nginx/error.log;   # nginx错误日志，可自行设置，但必须保证提前建立好该目录和文件
 	charset utf-8;
 	gzip on;
@@ -208,6 +208,13 @@ uwsgi 启动服务
 	uwsgi --ini uwsgi.ini
 
 	service nginx start
+
+在运行打开首页试试，效果正常开始下一步，如果找不到首页css文件应该是nginx中的/static/目录设置错误，所以找不到静态文件目录。
+
+#### 怎么确定实现了动静分离? ####
+
+	// 使用 linux 提供的命令来实时观察文件变化，access.log为上方nginx配置的访问日志 
+	tail -f access.log 
 
 
 ### 以为到这里就完了？ ###
