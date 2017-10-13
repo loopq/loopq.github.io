@@ -27,28 +27,36 @@ tags:
 	[root@localhost ~]# python -V
 	Python 2.7.5
 	执行python -V即可获取当前版本。
+	
+	2.关闭防火墙，有防火墙爬不到种子
+	[root@localhost ~]# systemctl stop firewalld.service  //关闭firewall防火墙
+	[root@localhost ~]# systemctl disable firewalld.service    //禁止firewall防火墙开机启动
+	[root@localhost ~]# systemctl stop iptables.service   //关闭iptables防火墙
+	[root@localhost ~]# systemctl disable iptables.service    //禁止iptables防火墙开机启动
+
 	2.获取ssbc安装包
 	[root@localhost ~]# wget https://github.com/78/ssbc/archive/master.zip
-	[root@localhost~]# unzip master.zip
+	[root@localhost ~]# yum -y install unzip nano
+	[root@localhost ~]# unzip master.zip
 	解压后你会发现在root根目录先有个文件夹ssbc-master.
 
 	二．安装MariaDB
 	1.安装数据库及所需环境
 	[root@localhost ~]# yum -y install gcc gcc-c++ python-devel mariadb mariadb-devel mariadb-server
-	[root@localhost ~]# python-setuptools&&easy_install pip
-	[root@localhost ~]# easy_install pip
-	[root@localhost]# cd ssbc-master
+	[root@localhost ~]# yum -y install  python-setuptools&&easy_install pip
+	[root@localhost ~]# cd ssbc-master
 	[root@localhost ssbc-master]# pip install -r requirements.txt
 	[root@localhost ssbc-master]# pip install pygeoip
 	2.创建ssbc数据库
 	[root@localhost ~]# service mariadb start //启动数据库
 	[root@localhost ~]# mysql -uroot -p
 	Enter password: (回车即可)
-	MariaDB [(none)]&gt; create database ssbc default character set utf8;
-	MariaDB [(none)]&gt; quit; //创建成功后退出
+	MariaDB [(none)]& create database ssbc default character set utf8;
+	MariaDB [(none)]& SET GLOBAL max_allowed_packet=1024*1024*1024;
+	MariaDB [(none)]& flush privileges; // 刷新数据库
+	MariaDB [(none)]& quit; //创建成功后退出
 
 	三．Web设置
-	[root@localhost ssbc-master]#
 	[root@localhost ssbc-master]# python manage.py makemigrations
 	[root@localhost ssbc-master]# python manage.py migrate
 	[root@localhost ssbc-master]# python manage.py runserver 0.0.0.0:80 //启动ssbc
