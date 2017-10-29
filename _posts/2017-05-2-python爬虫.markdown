@@ -3,7 +3,7 @@ layout:     post
 title:      "Python 种子 爬虫总结"
 subtitle:   " \"Python 种子 爬虫总结\""
 date:       2015-01-29 12:00:00
-author:     "Hux"
+author:     "Daisy"
 header-img: "img/post-bg-2015.jpg"
 catalog: true
 tags:

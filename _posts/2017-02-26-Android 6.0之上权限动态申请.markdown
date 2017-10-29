@@ -3,7 +3,7 @@ layout:     post
 title:      "Android 6.0以上权限学习"
 subtitle:   " \"6.0以上权限学习\""
 date:       2015-01-29 12:00:00
-author:     "Hux"
+author:     "Daisy"
 header-img: "img/post-bg-2015.jpg"
 catalog: true
 tags:

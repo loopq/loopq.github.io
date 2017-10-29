@@ -3,7 +3,7 @@ layout:     post
 title:      "Android eventbus学习"
 subtitle:   " \"流行开源库 eventbus学习\""
 date:       2015-01-29 12:00:00
-author:     "Hux"
+author:     "Daisy"
 header-img: "img/post-bg-2015.jpg"
 catalog: true
 tags:
