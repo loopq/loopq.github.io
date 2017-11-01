@@ -84,6 +84,28 @@ OK.That's done.踩坑完毕
 [http://bbs.csdn.net/topics/390376611/](http://bbs.csdn.net/topics/390376611/)<br>
 [https://github.com/VictorAlbertos/RxCache/issues/41](https://github.com/VictorAlbertos/RxCache/issues/41)
 
+2017/11/1 9:58:27 更新，前段时间项目又用到了缓存，安装上面的做法确实可以解决RxCache缓存泛型的问题，但是我觉得并不够优雅，在P层加了很多无关的东西，下面是在github上找到的另一个解决办法。
+
+    // 一般来说BaseBean都是长这样
+	public class BaseBean<T>{
+		String msg; 
+		List<T> results;
+	}
+
+
+	// RxCache之所以不能解析T的类型是因为无法获取明确的类型，那我们给他一个明确的类型
+	public class ApiResponse extends BaseBean<ApiResponse.FocusListItem> {
+
+	    public static class FocusListItem {
+	        。。。
+	    }
+	}
+
+	// Cache模块的接口
+	Observable<Reply<ApiResponse>> getFocusList(Observable<ApiResponse> observable, EvictProvider evictProvider);
+
+亲测是有效的，记录下来，以备后记...
+
 
 	
 
