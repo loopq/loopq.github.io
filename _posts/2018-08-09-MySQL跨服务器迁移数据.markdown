@@ -1,0 +1,44 @@
+---
+layout:     post
+title:      "MySQL跨服务器迁移数据"
+subtitle:   " \"MySQL跨服务器迁移数据\""
+date:       2018/08/09 17:17:54 
+author:     "Daisy"
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+tags:
+    - 服务器
+---
+
+> “MySQL跨服务器迁移数据. ”
+
+前段时间进行服务器间千万数据的转移。使用的是mysql自带的工具**mysqldump**，下面是相应的从网上搜索来的方法
+
+
+
+```shell
+#!/bin/bash
+
+#服务器
+SERVER_HOST="111.111.111.111"
+SERVER_PORT="3306"
+SERVER_USER="root"
+SERVER_PASSWORD="123456"
+SERVER_DB="user_db"
+
+#本地
+LOCAL_HOST="localhost"
+LOCAL_PORT="3306"
+LOCAL_USER="root"
+LOCAL_PASSWORD="654321"
+
+
+#在本地创建对应数据库
+create_db_sql="create database IF NOT EXISTS ${SERVER_DB}"
+mysql -h${LOCAL_HOST}  -P${LOCAL_PORT}  -u${LOCAL_USER} -p${LOCAL_PASSWORD} -e "${create_db_sql}"
+
+#从远程数据库备份到本地数据库
+mysqldump --host=${SERVER_HOST} -u${SERVER_USER} -p${SERVER_PASSWORD} --opt ${SERVER_DB} | mysql --host=${LOCAL_HOST} -u${LOCAL_USER} -p${LOCAL_PASSWORD} -C ${SERVER_DB}
+```
+
+以备后记...
