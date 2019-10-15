@@ -4,7 +4,7 @@ title:      "记国庆期间北京合肥两地托运猫咪事"
 subtitle:   " \"记国庆期间北京合肥两地托运猫咪事\""
 date:       2018/10/12 12:30:54 
 author:     "Daisy"
-header-img: "img/post_bg_friends.jpg"
+header-img: "img/post_bg_cat.jpg"
 catalog: true
 tags:
     - 生活
