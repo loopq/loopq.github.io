@@ -10,7 +10,7 @@ tags:
     - Android EventBus
 ---
 
-> "GreenBot EventBus 源码分析"
+> "---"
 
-之前面试的时候被问过「既然用过eventBus，那么有没有去阅读过eventBus的源码呢？」，很遗憾当时就这样刷下来了。现在既然有时间那么就来看看源码，窥探其中的奥秘。
+Content
 
