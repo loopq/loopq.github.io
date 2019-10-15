@@ -4,7 +4,7 @@ title:      "我的英雄联盟之旅"
 subtitle:   " \"记录一下\""
 date:       2017-07-20 11:02:20
 author:     "Daisy"
-header-img: "img/post-bg-rwd.jpg"
+header-img: "img/post_bg_orange_tree.jpg"
 catalog: true
 tags:
     - 生活杂记
