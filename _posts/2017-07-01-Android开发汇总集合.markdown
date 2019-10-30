@@ -1,0 +1,36 @@
+---
+layout:     post
+title:      "Android开发资源"
+subtitle:   " \"个人收集简便Android开发资源\""
+date:       2017-07-01 11:02:20
+author:     "Daisy"
+header-img: "img/post-bg-rxcache.jpg"
+catalog: true
+tags:
+    - Android
+---
+
+> “life is never easy. ”
+
+# Android开发资源整合 #
+
+## 依赖库和SDK ##
+
+## 工具 ##
+[freeline比Android Studio更快的编译插件，增量更新十秒之内](https://github.com/alibaba/freeline "freeline")<br>
+[butterknife注入插件，不用多说，jake wharton编写](https://github.com/JakeWharton/butterknife)<br>
+[Android Material Design Icon Generator（可以生成Material Design图标的插件。）](https://github.com/konifar/android-material-design-icon-generator-plugin)<br>
+[GsonFormat，自动生成java实体类](https://plugins.jetbrains.com/plugin/7654-gsonformat)<br>
+[Gradle, Please](http://gradleplease.appspot.com/#retrofit)  [Chris broadFoot](https://chrisbroadfoot.id.au/)做的一个非常酷的一个library，只需要输入一个Library 的名字，就可以得到这个Library 的gradle依赖code，并且是该Library的最新版本，不要错过这个网站<br>
+
+
+## View ##
+[轮播图开源库，一个就够了](https://github.com/youth5201314/banner)
+
+
+
+
+
+
+
+
